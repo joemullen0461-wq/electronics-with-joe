@@ -3,113 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Electronics with Joe — practical electronics projects, test tools, and tutorials.">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="description" content="Electronics with Joe — practical electronics, real hardware, experimental magnetics and technical consulting.">
+  <link rel="icon" type="image/png" href="Weathered%20Metallic%20EJ%20Monogram%20Logo.png">
   <title>Electronics with Joe | Design · Build · Test · Learn</title>
   <style>
-    :root { --blue:#135bd8; --ink:#101828; --muted:#667085; --line:#e5eaf1; --soft:#f6f8fb; }
-    * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { margin:0; color:var(--ink); background:#fff; font-family:Arial,Helvetica,sans-serif; line-height:1.5; }
-    a { color:inherit; text-decoration:none; }
-    .wrap { max-width:1200px; margin:auto; padding:0 28px; }
-    .site-header { background:#fff; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:10; }
-    .header-inner { min-height:76px; display:flex; justify-content:space-between; align-items:center; gap:28px; }
-    .brand { display:flex; align-items:center; gap:13px; flex-shrink:0; }
-    .brand-mark { color:var(--blue); font-weight:900; font-size:29px; font-style:italic; letter-spacing:-3px; }
-    .brand-copy { font-weight:800; font-size:17px; line-height:1.1; letter-spacing:-.4px; }
-    .brand-copy small { color:var(--muted); display:block; font-size:9px; letter-spacing:1.6px; margin-top:6px; font-weight:700; }
-    nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:23px; font-size:14px; font-weight:700; }
-    nav a:hover, nav a:focus-visible { color:var(--blue); }
-    .hero { padding:64px 0 54px; }
-    .hero-grid { display:grid; grid-template-columns:minmax(290px, .9fr) minmax(0,1.2fr); gap:54px; align-items:center; }
-    .eyebrow { font-size:12px; letter-spacing:1.5px; color:var(--blue); font-weight:800; text-transform:uppercase; }
-    h1 { font-size:clamp(38px,4vw,59px); line-height:1.07; letter-spacing:-2.3px; margin:15px 0 20px; }
-    h1 span { color:var(--blue); }
-    .lead { color:#475467; font-size:17px; max-width:480px; margin-bottom:26px; }
-    .specs { list-style:none; padding:0; margin:0 0 28px; display:grid; gap:10px; }
-    .specs li { display:flex; gap:11px; align-items:flex-start; font-size:14px; }
-    .check { background:#e8f0ff; color:var(--blue); border-radius:50%; width:20px; height:20px; display:inline-grid; place-items:center; font-size:12px; font-weight:900; flex-shrink:0; }
-    .actions { display:flex; flex-wrap:wrap; gap:12px; }
-    .button { display:inline-flex; align-items:center; justify-content:center; padding:13px 20px; min-height:45px; border-radius:9px; font-size:14px; font-weight:800; border:1px solid #c6d3e5; transition:transform .15s ease,background .15s ease; }
-    .button:hover { transform:translateY(-2px); }
-    .button.primary { background:var(--blue); border-color:var(--blue); color:white; }
-    .button.secondary { background:white; color:var(--ink); }
-    .video-frame { background:#e9eef7; border:1px solid #d6dfec; border-radius:18px; overflow:hidden; box-shadow:0 24px 45px rgba(20,46,90,.14); }
-    .video-stage { aspect-ratio:16/9; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; background:radial-gradient(circle at 70% 25%, #2b497e, #0d1729 65%); }
-    /* This is a graphic placeholder, not a photograph of the actual device. */
-    .video-placeholder { color:white; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:26px; }
-    .device { width:min(72%,360px); border:7px solid #1c2536; outline:1px solid #52617a; border-radius:15px; background:#101723; box-shadow:13px 20px 28px rgba(0,0,0,.44); padding:20px; display:flex; align-items:center; justify-content:space-between; gap:12px; transform:perspective(800px) rotateY(-9deg); }
-    .screen { width:66%; background:#071424; border:2px solid #284f89; border-radius:5px; padding:11px 10px 5px; min-height:112px; }
-    .screen-label { color:#6ab6ff; font-size:clamp(9px,1vw,12px); font-weight:700; }
-    .screen-value { color:white; font-size:clamp(17px,2vw,25px); font-weight:700; margin:3px 0; }
-    .screen-small { color:#aee4ff; font-size:12px; }
-    .wave { width:100%; margin-top:6px; }
-    .device-buttons { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .device-buttons i { display:block; height:24px; width:24px; border-radius:50%; background:linear-gradient(135deg,#39485f,#111827); border:2px solid #556276; box-shadow:0 2px 3px #000; }
-    .video-note { color:#c3d0e7; text-align:center; margin-top:26px; font-size:13px; font-weight:700; letter-spacing:.4px; }
-    .video-note small { display:block; font-weight:400; margin-top:4px; color:#91a5c4; }
-    .hero-video { display:none; width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
-    .video-caption { padding:13px 18px; display:flex; justify-content:space-between; align-items:center; gap:10px; background:#fff; font-size:13px; }
-    .video-caption strong { font-size:14px; }
-    .video-caption span { color:var(--muted); }
-    .feature-strip { background:var(--soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .features { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; padding:24px 0; }
-    .feature { border-right:1px solid #d6deea; padding:3px 14px; }
-    .feature:last-child { border:0; }
-    .feature strong { display:block; font-size:14px; }
-    .feature span { font-size:12px; color:var(--muted); }
-    section.content { padding:65px 0; }
-    .section-top { display:flex; align-items:end; justify-content:space-between; margin-bottom:22px; gap:20px; }
-    h2 { margin:0; font-size:29px; letter-spacing:-.9px; }
-    .section-top p { margin:5px 0 0; color:var(--muted); }
-    .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
-    .card { border:1px solid var(--line); border-radius:14px; overflow:hidden; background:white; }
-    .card-art { height:155px; display:flex; justify-content:center; align-items:center; font-size:56px; font-weight:900; letter-spacing:-4px; }
-    .art-products { color:#e8f3ff; background:linear-gradient(120deg,#11274a,#1c5bac); }
-    .art-tutorials { color:#0d63cf; background:repeating-linear-gradient(135deg,#ebf2ff 0,#ebf2ff 14px,#e4eeff 14px,#e4eeff 28px); }
-    .art-projects { color:#fdf8ea; background:radial-gradient(circle,#c99146,#3f3027); }
-    .card-body { padding:19px 20px 23px; }
-    h3 { margin:0 0 7px; font-size:20px; }
-    .card-body p { color:var(--muted); font-size:14px; margin:0 0 13px; min-height:43px; }
-    .card-body a { font-weight:800; font-size:14px; color:var(--blue); }
-    .info-band { background:#f2f6fd; border-top:1px solid var(--line); padding:42px 0; }
-    .info-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center; }
-    .info-grid p { color:#475467; margin-bottom:0; }
-    .status { display:inline-block; border:1px solid #bcd0f7; color:#1b53a2; font-size:12px; border-radius:100px; padding:7px 12px; background:white; font-weight:800; }
-    footer { padding:30px 0; border-top:1px solid var(--line); color:var(--muted); font-size:13px; }
-    .footer-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-    @media(max-width:900px) {
-      .header-inner { align-items:flex-start; padding-top:17px; padding-bottom:15px; flex-direction:column; gap:15px; }
-      nav { justify-content:flex-start; gap:11px 19px; }
-      .hero-grid { grid-template-columns:1fr; gap:34px; }
-      .hero { padding-top:42px; }
-      .features { grid-template-columns:repeat(3,1fr); }
-      .cards { grid-template-columns:1fr; }
-      .info-grid { grid-template-columns:1fr; gap:12px; }
+    :root {
+      color-scheme: dark;
+      --bg: #0b0e12;
+      --header: #0d1117;
+      --panel: #11161d;
+      --panel-alt: #151b23;
+      --line: #30363d;
+      --line-soft: #222931;
+      --ink: #e6edf3;
+      --muted: #919ba7;
+      --bright: #f4f5f6;
+      --accent: #c9d1d9;
     }
-    @media(max-width:520px) {
-      .wrap { padding:0 18px; }
-      h1 { font-size:41px; }
-      nav { font-size:12px; }
-      .features { grid-template-columns:repeat(2,1fr); }
-      .feature:nth-child(even) { border:0; }
-      .device { width:84%; padding:10px; border-width:5px; }
-      .device-buttons { gap:5px; }
-      .device-buttons i { height:17px; width:17px; }
-      .screen { min-height:85px; padding:7px; }
-      .video-caption { align-items:flex-start; flex-direction:column; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 115px; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 Arial, Helvetica, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--bright); outline-offset: 3px; }
+    .wrap { max-width: 1220px; margin: 0 auto; padding: 0 28px; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+    .eyebrow, .serial { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: #a4afb9; }
+
+    /* Compact, repository-inspired header. */
+    .site-header { position: sticky; top: 0; z-index: 30; background: rgba(13,17,23,.97); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 82px; }
+    .brand { display: flex; align-items: center; gap: 13px; flex-shrink: 0; min-width: 0; }
+    .brand-logo { width: 60px; height: 60px; object-fit: contain; display: block; background: #07090b; border: 1px solid var(--line); border-radius: 7px; padding: 3px; }
+    .brand-name { display: block; font-weight: 800; font-size: 16px; letter-spacing: -.3px; line-height: 1.18; }
+    .brand-tag { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; letter-spacing: 1.25px; font-weight: 700; }
+    nav { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    nav a { padding: 8px 10px; font-weight: 700; color: #aab4bf; font-size: 12px; border: 1px solid transparent; border-radius: 6px; white-space: nowrap; }
+    nav a:hover, nav a:focus-visible { color: var(--bright); background: var(--panel-alt); border-color: var(--line); }
+
+    /* Same split-hero layout, now with the user's real photograph. */
+    .hero { position: relative; padding: 66px 0 55px; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .25; background-image: linear-gradient(#202832 1px, transparent 1px), linear-gradient(90deg, #202832 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(to bottom, black, transparent 93%); }
+    .hero-grid { position: relative; display: grid; grid-template-columns: minmax(290px,.92fr) minmax(0,1.2fr); gap: 52px; align-items: center; }
+    .eyebrow::before { content: "■"; font-size: 9px; margin-right: 10px; color: #b9c1c9; }
+    h1 { font-size: clamp(38px, 4.5vw, 62px); line-height: 1.07; letter-spacing: -2.6px; margin: 16px 0 20px; }
+    h1 span { color: #9ca7b2; }
+    .lead { color: #a7b1bd; font-size: 17px; max-width: 480px; margin: 0 0 27px; }
+    .specs { padding: 0; margin: 0 0 28px; list-style: none; display: grid; gap: 10px; }
+    .specs li { display: flex; gap: 11px; align-items: flex-start; font-size: 14px; }
+    .check { display: inline-grid; place-items: center; width: 19px; height: 19px; flex-shrink: 0; color: var(--bright); border: 1px solid #65717d; border-radius: 4px; font: bold 12px/1 ui-monospace, monospace; }
+    .actions { display: flex; gap: 11px; flex-wrap: wrap; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 43px; padding: 11px 16px; font-weight: 800; font-size: 13px; border: 1px solid var(--line); border-radius: 6px; transition: background .16s ease, border-color .16s ease; }
+    .button.primary { background: #e6edf3; border-color: #e6edf3; color: #0d1117; }
+    .button.primary:hover { background: #fff; }
+    .button.secondary { background: #161b22; color: var(--ink); }
+    .button.secondary:hover { background: #242b34; }
+    .media-frame { background: #0d1117; border: 1px solid #3b434c; border-radius: 9px; overflow: hidden; box-shadow: 0 23px 50px rgba(0,0,0,.3); }
+    .media-stage { position: relative; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #090b0e; }
+    .hero-photo, .hero-video { width: 100%; height: 100%; object-fit: contain; position: absolute; inset: 0; }
+    .hero-video { display: none; background: #07090b; }
+    .media-stamp { position: absolute; left: 14px; top: 14px; z-index: 2; padding: 6px 9px; background: rgba(6,8,10,.82); border: 1px solid #4c5661; border-radius: 4px; color: #f0f3f5; font: 700 10px/1.2 ui-monospace, monospace; letter-spacing: .8px; }
+    .media-caption { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 16px; border-top: 1px solid var(--line); font-size: 12px; }
+    .media-caption strong { color: var(--ink); font-size: 13px; }
+    .media-caption span { color: var(--muted); }
+
+    .feature-strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--header); }
+    .features { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; padding: 23px 0; }
+    .feature { padding: 2px 16px; border-right: 1px solid var(--line); }
+    .feature:first-child { padding-left: 0; }
+    .feature:last-child { border-right: 0; }
+    .feature strong { display: block; font-size: 13px; }
+    .feature span { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
+    section.content { padding: 67px 0; }
+    .section-top { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 0 0 22px; }
+    h2 { margin: 0; font-size: 29px; letter-spacing: -.8px; line-height: 1.15; }
+    .section-top p, .section-description { margin: 8px 0 0; color: var(--muted); }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+    .card-art { height: 145px; display: flex; align-items: end; justify-content: space-between; padding: 19px; background-color: #141a21; background-image: linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px); background-size: 22px 22px; border-bottom: 1px solid var(--line); }
+    .card-art strong { color: #c6cdd4; font: 800 37px/1 ui-monospace, monospace; letter-spacing: -2px; }
+    .card-art .serial { color: #7c8793; }
+    .card-body { padding: 19px 20px 22px; }
+    h3 { font-size: 20px; margin: 0 0 7px; }
+    .card-body p { color: var(--muted); font-size: 14px; min-height: 47px; margin: 0 0 14px; }
+    .card-body a { color: var(--bright); font-size: 13px; font-weight: 800; border-bottom: 1px solid #77818a; padding-bottom: 3px; }
+    .card-body a:hover { border-color: white; }
+    .info-band { padding: 46px 0; background: #10151c; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .info-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 55px; align-items: center; }
+    .info-grid p { color: #a7b1bd; margin: 10px 0 0; }
+    .status { display: inline-block; padding: 7px 11px; border: 1px solid #53606b; background: #171d24; border-radius: 5px; color: var(--ink); font: bold 11px/1.2 ui-monospace, monospace; letter-spacing: .3px; }
+    .split-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .split-panel { padding: 27px; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; }
+    .split-panel h2 { font-size: 24px; margin: 12px 0 9px; }
+    .split-panel p { color: var(--muted); margin: 0; }
+    .split-panel .eyebrow { color: #a8b3bf; }
+    footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--header); color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    @media(max-width: 1080px) {
+      .header-inner { align-items: flex-start; flex-direction: column; padding-top: 12px; padding-bottom: 12px; gap: 10px; }
+      nav { justify-content: flex-start; }
+      nav a { padding: 6px 9px; }
     }
-    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .button { transition:none; } }
+    @media(max-width: 850px) {
+      .hero { padding-top: 40px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .features { grid-template-columns: repeat(3,1fr); row-gap: 19px; }
+      .feature:nth-child(3) { border: 0; }
+      .feature:nth-child(4) { padding-left: 0; }
+      .cards { grid-template-columns: 1fr; }
+      .info-grid, .split-panels { grid-template-columns: 1fr; gap: 20px; }
+    }
+    @media(max-width: 520px) {
+      .wrap { padding: 0 18px; }
+      .brand-logo { width: 51px; height: 51px; }
+      .brand-name { font-size: 14px; }
+      .brand-tag { font-size: 8px; }
+      nav { gap: 2px; }
+      nav a { font-size: 11px; padding: 6px 8px; }
+      h1 { font-size: 41px; }
+      .features { grid-template-columns: repeat(2,1fr); }
+      .feature { border: 0; padding: 2px 12px 2px 0; }
+      .media-caption { flex-direction: column; align-items: flex-start; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
   </style>
 </head>
 <body>
   <header class="site-header" id="home">
     <div class="wrap header-inner">
-      <!-- Temporary text mark; replace with your actual EWJ logo later. -->
       <a class="brand" href="#home" aria-label="Electronics with Joe home">
-        <span class="brand-mark">EWJ</span>
-        <span class="brand-copy">Electronics with Joe<small>DESIGN · BUILD · TEST · LEARN</small></span>
+        <img class="brand-logo" src="Weathered%20Metallic%20EJ%20Monogram%20Logo.png" alt="Electronics with Joe EJ monogram logo" width="60" height="60">
+        <span><span class="brand-name">Electronics with Joe</span><span class="brand-tag">DESIGN // BUILD // TEST // LEARN</span></span>
       </a>
       <nav aria-label="Main navigation">
         <a href="#home">Home</a>
@@ -119,6 +144,8 @@
         <a href="#downloads">Downloads</a>
         <a href="#courses">Courses</a>
         <a href="#membership">Membership</a>
+        <a href="#experimental-magnetics">Experimental Magnetics</a>
+        <a href="#consulting">Consulting</a>
       </nav>
     </div>
   </header>
@@ -127,9 +154,9 @@
     <section class="hero">
       <div class="wrap hero-grid">
         <div>
-          <div class="eyebrow">Featured build · PWM Generator V1</div>
+          <div class="eyebrow">Featured hardware / 001</div>
           <h1>Precision signal<br><span>control.</span></h1>
-          <p class="lead">A compact PWM and square-wave generator for the workbench. Designed, built, and tested at Electronics with Joe.</p>
+          <p class="lead">A compact PWM and square-wave generator for the workbench. Designed, built and tested at Electronics with Joe.</p>
           <ul class="specs">
             <li><span class="check">✓</span>Target frequency range: 1 Hz – 1 MHz</li>
             <li><span class="check">✓</span>Adjustable frequency and duty cycle</li>
@@ -137,29 +164,18 @@
             <li><span class="check">✓</span>USB-C power and BNC output</li>
           </ul>
           <div class="actions">
-            <a class="button primary" href="#products">Explore the PWM Generator</a>
+            <a class="button primary" href="#product-details">Explore the PWM Generator</a>
             <a class="button secondary" href="#projects">See projects →</a>
           </div>
         </div>
-        <div class="video-frame" aria-label="PWM Generator video preview area">
-          <div class="video-stage">
-            <div class="video-placeholder" id="videoPlaceholder">
-              <div class="device" aria-hidden="true">
-                <div class="screen">
-                  <div class="screen-label">PWM Generator</div>
-                  <div class="screen-value">1.000 kHz</div>
-                  <div class="screen-small">Duty: 50.0%</div>
-                  <svg class="wave" viewBox="0 0 200 40" role="presentation" aria-hidden="true">
-                    <path d="M0 31 H15 V8 H40 V31 H65 V8 H90 V31 H115 V8 H140 V31 H165 V8 H190 V31 H200" fill="none" stroke="#46c6ff" stroke-width="4" stroke-linejoin="round" />
-                  </svg>
-                </div>
-                <div class="device-buttons"><i></i><i></i><i></i><i></i></div>
-              </div>
-              <div class="video-note">REAL PRODUCT VIDEO COMING SOON<small>Placeholder illustration — actual PWM Generator footage will go here</small></div>
-            </div>
-            <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="metadata" aria-label="PWM Generator demonstration video"></video>
+        <div class="media-frame">
+          <div class="media-stage">
+            <!-- This is the actual photograph uploaded to the ROOT of your GitHub repository. -->
+            <img class="hero-photo" id="heroPhoto" src="5094.jpg" alt="Real PWM Generator V1 prototype photograph" fetchpriority="high">
+            <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="metadata" poster="5094.jpg" aria-label="PWM Generator demonstration video"></video>
+            <span class="media-stamp">ACTUAL HARDWARE / V1</span>
           </div>
-          <div class="video-caption"><strong>PWM Generator V1 · Product demonstration</strong><span>Video in production</span></div>
+          <div class="media-caption"><strong>PWM Generator V1 · Prototype photo</strong><span>Video demonstration coming later</span></div>
         </div>
       </div>
     </section>
@@ -176,48 +192,61 @@
 
     <section class="content" id="products">
       <div class="wrap">
-        <div class="section-top"><div><h2>Explore Electronics with Joe</h2><p>Products, practical learning, and hands-on engineering.</p></div></div>
+        <div class="section-top"><div><h2>Explore Electronics with Joe</h2><p>Products, practical learning and hands-on engineering.</p></div></div>
         <div class="cards">
-          <article class="card"><div class="card-art art-products">PWM</div><div class="card-body"><h3>Products</h3><p>Test tools designed for students, makers, and the electronics bench.</p><a href="#product-details">Explore products →</a></div></article>
-          <article class="card" id="tutorials"><div class="card-art art-tutorials">{ }</div><div class="card-body"><h3>Tutorials</h3><p>Build guides, design notes, demonstrations, and practical testing.</p><a href="#courses">Browse tutorials →</a></div></article>
-          <article class="card" id="projects"><div class="card-art art-projects">⚡</div><div class="card-body"><h3>Projects</h3><p>Real electronics experiments, RF work, and energy-system builds.</p><a href="#downloads">Explore projects →</a></div></article>
+          <article class="card"><div class="card-art"><strong>01 / PWM</strong><span class="serial">HARDWARE</span></div><div class="card-body"><h3>Products</h3><p>Real test tools designed for makers, students and the electronics bench.</p><a href="#product-details">Explore products →</a></div></article>
+          <article class="card" id="tutorials"><div class="card-art"><strong>02 / LAB</strong><span class="serial">LEARNING</span></div><div class="card-body"><h3>Tutorials</h3><p>Build guides, design notes, demonstrations and practical testing.</p><a href="#courses">Browse tutorials →</a></div></article>
+          <article class="card" id="projects"><div class="card-art"><strong>03 / DEV</strong><span class="serial">PROJECTS</span></div><div class="card-body"><h3>Projects</h3><p>Hands-on RF, power electronics, embedded systems and experimental builds.</p><a href="#experimental-magnetics">Explore projects →</a></div></article>
         </div>
       </div>
     </section>
 
     <section class="info-band" id="product-details">
       <div class="wrap info-grid">
-        <div><div class="eyebrow">First product</div><h2>PWM Generator V1</h2><p>A simple, dedicated signal source with physical controls and an onboard display. We are finishing the prototype and documenting real test results before launch.</p></div>
-        <div><span class="status">Prototype in progress</span><p>Planned price: <strong>$79.99 CAD + shipping</strong>. Availability and final specifications will be confirmed at launch.</p></div>
+        <div><div class="eyebrow">First product</div><h2>PWM Generator V1</h2><p>A dedicated signal source with physical controls and an onboard display. The prototype is being finalized and real test results will be published before launch.</p></div>
+        <div><span class="status">PROTOTYPE / IN PROGRESS</span><p>Planned price: <strong>$79.99 CAD + shipping</strong>. Final specifications and availability will be confirmed at launch.</p></div>
       </div>
     </section>
 
     <section class="content" id="downloads">
       <div class="wrap info-grid">
-        <div><div class="eyebrow">Knowledge base</div><h2>Files, notes &amp; downloads</h2><p>Firmware, schematics, design files, and test documentation will be organized here as projects are published.</p></div>
-        <div id="courses"><h2>Learn by building</h2><p>Courses and guided project lessons are planned. For now, follow the latest work on the site.</p></div>
+        <div><div class="eyebrow">Knowledge base</div><h2>Files, notes &amp; downloads</h2><p>Firmware, schematics, design files and test documentation will be organized here as projects are published.</p></div>
+        <div id="courses"><div class="eyebrow">Learn</div><h2>Learn by building</h2><p>Courses and guided project lessons are planned. For now, follow the latest builds and lab notes.</p></div>
+      </div>
+    </section>
+
+    <section class="content" id="experimental-magnetics" style="padding-top: 0;">
+      <div class="wrap split-panels">
+        <div class="split-panel">
+          <div class="eyebrow">Research / experiments</div>
+          <h2>Experimental Magnetics</h2>
+          <p>Magnetic systems, field measurements, switching experiments and practical test setups. Documenting methods and results as the work develops.</p>
+        </div>
+        <div class="split-panel" id="consulting">
+          <div class="eyebrow">Technical services</div>
+          <h2>Consulting</h2>
+          <p>Electronics troubleshooting, RF and power-electronics test support, prototypes and technical documentation. Contact information and service details coming soon.</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer id="membership">
-    <div class="wrap footer-inner"><span>© <span id="year">2026</span> Electronics with Joe</span><span>Designed, built &amp; tested in Ontario, Canada · Membership coming soon</span></div>
+    <div class="wrap footer-inner"><span>© <span id="year">2026</span> Electronics with Joe</span><span>Ontario, Canada · Membership coming soon</span></div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // WHEN YOUR REAL VIDEO IS READY:
-    // 1. Upload pwm-generator-demo.mp4 into a "media" folder in GitHub.
-    // 2. Change the blank string below to: "media/pwm-generator-demo.mp4"
-    // 3. Commit. Cloudflare will publish it automatically.
+    // FUTURE VIDEO: upload your recording to GitHub, then set the path here.
+    // Example: const VIDEO_URL = "media/pwm-generator-demo.mp4";
     const VIDEO_URL = "";
     if (VIDEO_URL) {
       const video = document.getElementById('heroVideo');
-      const placeholder = document.getElementById('videoPlaceholder');
+      const photo = document.getElementById('heroPhoto');
       video.src = VIDEO_URL;
       video.addEventListener('loadeddata', () => {
-        placeholder.style.display = 'none';
+        photo.style.display = 'none';
         video.style.display = 'block';
         video.play().catch(() => { video.controls = true; });
       });
